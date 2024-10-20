@@ -5,9 +5,9 @@ import { Stack } from 'expo-router'
 export default function index() {
   return (
     <>
-      <Stack.Screen options={{
+     <Stack.Screen options={{
         headerTitleAlign: "left",
-        headerTitle: "Agregar Usuario",
+        headerTitle: "Tus Contactos",
       }} />
       <Container>
         <Text>Holis </Text>
