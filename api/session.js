@@ -1,22 +1,42 @@
 import * as SecureStore from 'expo-secure-store';
+import { Global } from '../lib/Globals';
 
 export const session = async (form) => {
    try {
-      const { email, pass } = form
-      if (email !== "admin@mail.com") return { status: "error", message: "Credenciales invalidas" }
-      if (pass !== "123456") return { status: "error", message: "Credenciales invalidas" }
-      const response = {
-         id: 1,
-         nombre1: "Mario",
-         nombre2: "Alberto",
-         apellido1: "Tubay",
-         apellido2: "Suarez",
-         telefono: "1234567890",
-         celular: "cel1234567890",
-         photo: "https://waveplusweb.com/myweb/avatar.png"
-      }
-      await SecureStore.setItemAsync("user", JSON.stringify(response));
-      return { status: "success", user: response }
+      // const { email, pass } = form
+      // if (email !== "admin@mail.com") return { status: "error", message: "Credenciales invalidas" }
+      // if (pass !== "123456") return { status: "error", message: "Credenciales invalidas" }
+      // const response = {
+      //    id: 1,
+      //    nombre1: "Mario",
+      //    nombre2: "Alberto",
+      //    apellido1: "Tubay",
+      //    apellido2: "Suarez",
+      //    telefono: "1234567890",
+      //    celular: "cel1234567890",
+      //    photo: "https://waveplusweb.com/myweb/avatar.png"
+      // }
+      
+      const response = await fetch(`${Global.API_URL}/user/login`,{
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json"
+         },
+         body: JSON.stringify(form)
+      })
+      .then(res => res.json())
+      .catch(e => {
+         return {
+            status: "error",
+            message: "Ocurrio un error al iniciar sesion"
+         }
+      })
+      console.log(response)
+
+      if(response.status === "error") return response;
+
+      await SecureStore.setItemAsync("user", JSON.stringify(response.user));
+      return { status: "success", user: response.user }
    } catch (error) {
       return {
          status: "error",
@@ -58,9 +78,9 @@ export const getSession = async () => {
 
 
 export const validateForm = (form) => {
-   let errors = { email: "", pass: "" };
+   let errors = { email: "", password: "" };
    if (!form.email || form.email === "") errors.email = "El correo es obligatorio"
-   if (!form.pass) errors.pass = "La contraseña es obligatoria";
+   if (!form.password) errors.password = "La contraseña es obligatoria";
    return errors;
  };
  

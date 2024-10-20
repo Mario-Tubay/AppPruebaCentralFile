@@ -8,20 +8,22 @@ import { Link, router, Stack } from 'expo-router';
 export default function App() {
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
-    email: '', pass: ''
+    email: '', password: ''
   })
   const [formError, setFormError] = useState({
-    email: '', pass: ''
+    email: '', password: ''
   })
   const onLogin = async () => {
+    // console.log("aquii")
     setLoading(true)
     if (Object.values(validateForm(form)).some(value => value.trim() != '')) {
       setFormError(validateForm(form))
       return setLoading(false)
     } else {
-      setFormError({ email: '', pass: '' })
+      setFormError({ email: '', password: '' })
     }
     const response = await session(form)
+    console.log(response)
     setLoading(false)
     if (response.status === "error") return Alert.alert("Error", response.message)
 
@@ -44,7 +46,7 @@ export default function App() {
           </View>
           <View className="mb-5">
             <Label>Contraseña</Label>
-            <Input error={formError.pass} secure={true} value={form.pass} onChangeText={(text) => setForm({ ...form, pass: text })} />
+            <Input error={formError.password} secure={true} value={form.password} onChangeText={(text) => setForm({ ...form, password: text })} />
           </View>
         </KeyboardAvoidingView>
         <View className="my-5">

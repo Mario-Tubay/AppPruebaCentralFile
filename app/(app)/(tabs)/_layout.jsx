@@ -9,8 +9,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Inicio',
           tabBarIcon: ({ color }) =><AntDesign name="home" size={24} color={color} />,
+        }}
+      />
+       <Tabs.Screen
+        name="adduser"
+        options={{
+          title: 'Agregar Usuario',
+          tabBarIcon: ({ color }) => <AntDesign name="adduser" size={24} color={color} />,
         }}
       />
        <Tabs.Screen

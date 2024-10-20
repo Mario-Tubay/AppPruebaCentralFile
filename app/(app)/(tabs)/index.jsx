@@ -1,10 +1,25 @@
-import { View, Text } from 'react-native'
+
 import React from 'react'
+import { CardContact, Container } from '../../../components'
+import { Stack } from 'expo-router'
 
 export default function index() {
+
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <>
+      <Stack.Screen options={{
+        headerTitleAlign: "left",
+        headerTitle: "Tus Contactos",
+      }} />
+      <Container type='scroll'>
+        <CardContact />
+        <CardContact />
+        <CardContact />
+        <CardContact />
+        <CardContact />
+        <CardContact />
+
+      </Container>
+    </>
   )
 }
