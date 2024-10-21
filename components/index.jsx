@@ -4,11 +4,15 @@ import Button from "./ui/Button.jsx";
 import Container from "./ui/Container.jsx";
 import PageLoading from "./ui/PageLoading.jsx";
 import CardContact from "./ui/CardContact.jsx";
+import CardContactEsqueleto from "./ui/CardContactEsqueleto.jsx";
+import UpdateFile from "./Form/UpdateFile.jsx";
 export {
     Input,
     Label,
     Button,
     Container, 
     PageLoading,
-    CardContact
+    CardContact,
+    CardContactEsqueleto,
+    UpdateFile
 }

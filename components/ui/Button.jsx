@@ -1,5 +1,5 @@
 
-import { View, Text, Pressable, ActivityIndicator } from 'react-native'
+import { Text, Pressable, ActivityIndicator } from 'react-native'
 import { useState } from 'react'
 
 export default function Button({ type = "default", children, onPress, loading = false, classText="" }) {

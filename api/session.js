@@ -3,20 +3,6 @@ import { Global } from '../lib/Globals';
 
 export const session = async (form) => {
    try {
-      // const { email, pass } = form
-      // if (email !== "admin@mail.com") return { status: "error", message: "Credenciales invalidas" }
-      // if (pass !== "123456") return { status: "error", message: "Credenciales invalidas" }
-      // const response = {
-      //    id: 1,
-      //    nombre1: "Mario",
-      //    nombre2: "Alberto",
-      //    apellido1: "Tubay",
-      //    apellido2: "Suarez",
-      //    telefono: "1234567890",
-      //    celular: "cel1234567890",
-      //    photo: "https://waveplusweb.com/myweb/avatar.png"
-      // }
-      
       const response = await fetch(`${Global.API_URL}/user/login`,{
          method: "POST",
          headers: {
