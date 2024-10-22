@@ -26,4 +26,4 @@ export default function Button({ type = "default", children, onPress, loading = 
                   }
             </Pressable>
       )
-}     
+}

@@ -6,6 +6,24 @@ export default function ProfileLayout() {
             headerShown: false,
         }} >
             <Stack.Screen name="index" options={{ title: 'Profile' }} />
+            <Stack.Screen
+                name="borrarcuenta"
+                options={{
+                    presentation: 'modal',
+                }}
+            />
+            <Stack.Screen
+                name="informacion"
+                options={{
+                    presentation: 'modal',
+                }}
+            />
+            <Stack.Screen
+                name="deshabilitarcuenta"
+                options={{
+                    presentation: 'modal',
+                }}
+            />
         </Stack>
     );
 }

@@ -14,10 +14,10 @@ export const session = async (form) => {
       .catch(e => {
          return {
             status: "error",
-            message: "Ocurrio un error al iniciar sesion"
+            message: "Ocurrio un error al iniciar sesion",
+            errorMessage: e.message,
          }
       })
-      console.log(response)
 
       if(response.status === "error") return response;
 
@@ -52,6 +52,25 @@ export const getSession = async () => {
    try {
       const user = await SecureStore.getItemAsync("user");
       if (!user) return { status: "logout", message: "No hay session" }
+
+      let parsearJson = JSON.parse(user)
+      
+      const response = await fetch(`${Global.API_URL}/user/getUserById/${parsearJson.id}`,{
+         method: "GET",
+         headers: {
+            "Content-Type": "application/json"
+         },
+      })
+      .then(res => res.json())
+      .catch(e => {
+         return {
+            status: "error",
+            message: "Ocurrio un error al iniciar sesion",
+            errorMessage: e.message,
+         }
+      })
+
+      await SecureStore.setItemAsync("user", JSON.stringify(response.user));
       return { status: "authenticated", user: JSON.parse(user) }
    } catch (error) {
       return {

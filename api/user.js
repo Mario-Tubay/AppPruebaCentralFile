@@ -1,4 +1,6 @@
 import { Global } from "../lib/Globals"
+import { getSession } from "./session";
+import * as Network from 'expo-network';
 
 export const registerUser = async (form) => {
     try {
@@ -44,6 +46,10 @@ export const registerUser = async (form) => {
 
 export const getContacts = async (id) => {
     try {
+        const stateNet = await Network.getNetworkStateAsync();
+        console.log("Network", stateNet)
+
+        
         const response = await fetch(`${Global.API_URL}/user/getContacts/${id}`, {
             method: "GET",
             headers: {
@@ -111,6 +117,150 @@ export const addUserContact = async (form) => {
         return {
             status: "error",
             message: "Ocurrio un error al obtener los usuarios"
+        }
+    }
+}
+
+
+export const deleteContact = async (form) => {
+    try {
+        const response = await fetch(`${Global.API_URL}/user/deleteContact`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json())
+            .catch(e => {
+                return {
+                    status: "error",
+                    message: "Ocurrio un error",
+                    errorMessage: e.message
+                }
+            })
+        return response
+    } catch (error) {
+        return {
+            status: "error",
+            message: "Ocurrio un error al obtener los usuarios"
+        }
+    }
+}
+
+
+export const deleteUserPermant = async (form) => {
+    try {
+        const response = await fetch(`${Global.API_URL}/user/deleteUserPermanent`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json())
+            .catch(e => {
+                return {
+                    status: "error",
+                    message: "Ocurrio un error",
+                    errorMessage: e.message
+                }
+            })
+        return response
+    } catch (error) {
+        return {
+            status: "error",
+            message: "Ocurrio un error al obtener los usuarios"
+        }
+    }
+}
+
+export const updatePhotProfile = async (form) => {
+    try {
+        const formData = new FormData();
+        formData.append('file', {
+            uri: form.foto,
+            name: 'photo.jpg',
+            type: 'image/jpeg',
+        });
+        formData.append('id_user', form.id_user);
+
+
+        const response = await fetch(`${Global.API_URL}/user/updatePhotProfile`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            body: formData
+        }).then(res => res.json())
+            .catch(e => {
+                return {
+                    status: "error",
+                    message: "Ocurrio un error al registrar"
+                }
+            })
+        if (response.status == "success") {
+            const user = await getSession()
+        }
+        return response
+    } catch (e) {
+        return {
+            status: "error",
+            message: "Ocurrio un error al registrar"
+        }
+    }
+}
+
+export const updateUser = async (form) => {
+    try {
+        console.log(form)
+        const response = await fetch(`${Global.API_URL}/user/updateUser`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json())
+            .catch(e => {
+                return {
+                    status: "error",
+                    message: "Ocurrio un error al actualizar",
+                    errorMessage: e.message
+                }
+            })
+        if (response.status == "success") {
+            const user = await getSession()
+        }
+        return response
+    } catch (e) {
+        return {
+            status: "error",
+            message: "Ocurrio un error al actualizar",
+            errorMessage: e.message
+        }
+    }
+}
+
+export const deshabilitarAcount = async (form) => {
+    try {
+        const response = await fetch(`${Global.API_URL}/user/deshabilitarCuenta`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(form)
+        }).then(res => res.json())
+            .catch(e => {
+                return {
+                    status: "error",
+                    message: "Ocurrio un error al actualizar",
+                    errorMessage: e.message
+                }
+            })
+        return response
+    } catch (e) {
+        return {
+            status: "error",
+            message: "Ocurrio un error al actualizar",
+            errorMessage: e.message
         }
     }
 }

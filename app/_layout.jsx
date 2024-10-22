@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
 import SessionProvider from '../context/SessionProvider'
-import { Slot, Stack } from 'expo-router'
+import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 
 

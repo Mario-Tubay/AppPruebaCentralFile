@@ -14,7 +14,6 @@ export default function App() {
     email: '', password: ''
   })
   const onLogin = async () => {
-    // console.log("aquii")
     setLoading(true)
     if (Object.values(validateForm(form)).some(value => value.trim() != '')) {
       setFormError(validateForm(form))

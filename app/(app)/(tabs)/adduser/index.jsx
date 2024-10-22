@@ -1,23 +1,24 @@
 
 import React, { useEffect, useState } from 'react'
-import { CardContact, Container, CardContactEsqueleto, Label } from '../../../../components'
-import { Stack } from 'expo-router'
-import { Alert, FlatList, RefreshControl, ScrollView, Text, View } from 'react-native'
+import { CardContact, Container, CardContactEsqueleto, Label, Button } from '../../../../components'
+import { router, Stack } from 'expo-router'
+import { Alert, FlatList, Modal, Pressable, RefreshControl, ScrollView, Text, View } from 'react-native'
 import useSession from '../../../../hooks/useSession'
 import { addUserContact, getNotContact } from '../../../../api/user'
 import NotFoundImage from '../../../../components/ui/NotFoundImage'
+import ModalPerfil from '../../../../components/ui/ModalPerfil'
 
 export default function index() {
   const { session } = useSession()
-
+  const [modalVisible, setModalVisible] = useState(false);
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
+  const [selectedUser, setSelectedUser] = useState(null)
 
   const allData = async () => {
     const { user } = await session()
     const response = await getNotContact(user.id)
-    console.log(response)
     if (response.status === "error") return
     setUsers(response.users)
     setLoading(false)
@@ -41,6 +42,10 @@ export default function index() {
 
   }
 
+  const profile = (item) => {
+    setModalVisible(true)
+    setSelectedUser(item)
+  }
   useEffect(() => {
     setLoading(true)
     allData()
@@ -82,9 +87,11 @@ export default function index() {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
           data={users}
-          renderItem={({ item }) => <CardContact onPress1={() => addUser(item.id)} type='add' key={item.id} item={item} />}
+          renderItem={({ item }) => <CardContact onPress1={() => addUser(item.id)} onPress2={()=>profile(item)} type='add' key={item.id} item={item} />}
           keyExtractor={item => item.id}
         />
+
+       <ModalPerfil item={selectedUser} modalVisible={modalVisible} setModalVisible={setModalVisible} />
 
       </Container>
     </>
