@@ -72,6 +72,5 @@ El borrar cuenta usa un borrado de datos a la base de datos
 
 ### Deshabilitar cuenta
 Usa un borrado logico es decir cambia de estado en la base de datos de 1 a 0
-> **⚠️ Advertencia:** Aunque nunca se debe hacer, se lo hizo esta vez para fines practico y porque la documentacion de la prueba lo requeria 
 
 <img src="assets/exampleApp/deshabilitar_cuenta.png" alt="Borrar cuenta" width="300" />
