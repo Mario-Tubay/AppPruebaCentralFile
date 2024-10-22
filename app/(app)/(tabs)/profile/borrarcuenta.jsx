@@ -9,7 +9,7 @@ import { router } from 'expo-router'
 
 export default function borrarcuenta() {
    const { session } = useSession()
-   const [loading, setLoading] = useState(true)
+   const [loading, setLoading] = useState(false)
 
    const verifyDelete = () => {
       Alert.alert(
