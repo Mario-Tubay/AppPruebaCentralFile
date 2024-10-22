@@ -1,5 +1,9 @@
 ## 🚀 Pasos para el uso
 
+Puedes descargar el apk si tienes un dispositivo Android [APK](https://drive.google.com/file/d/1XA4L8ep2tFpinrRGBIxQr65B2qVU_pjS/view?usp=sharing), lo instalas en tu dispositivo y estara listo para usarse.
+
+Si deseas ejecutarlo en tu PC sigue estos pasos
+
 1. Instalar [NodeJS](https://nodejs.org/en/), necesitamos tener instalado el empaquetador para usar `npm`
 2. Clonar el repositorio usando el comando `git clone https://github.com/Mario-Tubay/AppPruebaCentralFile.git`.
 3. Ejecutar el comando.
@@ -13,6 +17,8 @@ npx expo start
 ```
 
 Use el framework de [React Native](https://reactnative.dev/) mas popular y que la documentacion de react native recomienda que es [Expo](https://docs.expo.dev/) 
+
+### Para el backend use el Framework de [Laravel](https://laravel.com/) puedes revisar el repositorio [Aqui](https://github.com/Mario-Tubay/BackPruebaCentralFile)
 
 ## ¿Cómo decidió las opciones técnicas y arquitectónicas utilizadas como parte de su solución?
 Elegi [Expo](https://docs.expo.dev/)  por varias razones:
